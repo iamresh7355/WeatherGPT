@@ -1,0 +1,443 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #eef7ff, #f8fbff);
+  color: #172033;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* HEADER */
+
+.header {
+  text-align: center;
+  padding: 38px 20px 28px;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #e5edf7;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.tagline {
+  margin-top: 8px;
+  font-size: 17px;
+  color: #596579;
+}
+
+.powered {
+  margin-top: 16px;
+  font-size: 14px;
+  letter-spacing: 4px;
+  font-weight: 800;
+  color: #1769aa;
+}
+
+/* MAIN */
+
+main {
+  width: min(1150px, 94%);
+  margin: 35px auto;
+}
+
+/* HERO */
+
+.hero-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e1eaf4;
+  border-radius: 28px;
+  padding: 55px 35px;
+  text-align: center;
+  box-shadow: 0 20px 55px rgba(40, 80, 120, 0.12);
+}
+
+.hero-title h1 {
+  font-size: clamp(42px, 6vw, 72px);
+  margin-bottom: 8px;
+}
+
+.hero-title p {
+  font-size: 18px;
+  color: #667085;
+  margin-bottom: 35px;
+}
+
+.location {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.main-temperature {
+  font-size: 74px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.main-condition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 22px;
+}
+
+.weather-stats {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 30px auto 15px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  min-width: 150px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f5f9fd;
+  border: 1px solid #e3edf6;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat span {
+  font-size: 25px;
+}
+
+.stat strong {
+  font-size: 20px;
+}
+
+.stat small {
+  color: #667085;
+}
+
+.live-data {
+  color: #087443;
+  font-weight: 700;
+  margin: 15px;
+}
+
+/* ASK */
+
+.ask-section {
+  max-width: 850px;
+  margin: 35px auto 0;
+}
+
+.ask-section h2 {
+  font-size: 25px;
+  margin-bottom: 16px;
+}
+
+.question-box {
+  display: flex;
+  width: 100%;
+  border: 1px solid #cbd8e6;
+  border-radius: 14px;
+  overflow: hidden;
+  background: white;
+}
+
+.question-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 17px;
+  font-size: 16px;
+}
+
+.question-box button {
+  border: none;
+  padding: 0 28px;
+  background: #1769aa;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.question-box button:hover {
+  background: #0d558c;
+}
+
+.answer-box {
+  margin-top: 18px;
+  padding: 22px;
+  text-align: left;
+  border-radius: 16px;
+  background: #f2f8ff;
+  border: 1px solid #cfe3f5;
+}
+
+.answer-box h3 {
+  margin-bottom: 8px;
+}
+
+.answer-box p {
+  color: #475467;
+  line-height: 1.6;
+}
+
+/* SECTIONS */
+
+.section {
+  margin-top: 40px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  font-size: 30px;
+}
+
+/* FORECAST */
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.forecast-card {
+  background: white;
+  border: 1px solid #dfE8f2;
+  border-radius: 18px;
+  padding: 18px 10px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(40, 80, 120, 0.07);
+}
+
+.forecast-card h3 {
+  font-size: 15px;
+  color: #475467;
+}
+
+.forecast-icon {
+  font-size: 36px;
+  margin: 15px 0 10px;
+}
+
+.forecast-condition {
+  display: block;
+  font-size: 13px;
+  min-height: 32px;
+}
+
+.forecast-temp {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.forecast-temp .low {
+  color: #7b8794;
+  font-weight: 500;
+}
+
+.rain {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #1769aa;
+  font-weight: 700;
+}
+
+/* ALERT */
+
+.alert-card {
+  max-width: 850px;
+  margin: auto;
+  background: white;
+  border: 1px solid #e1e8f0;
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(40, 80, 120, 0.07);
+}
+
+.alert-icon {
+  font-size: 42px;
+}
+
+.alert-card h3 {
+  margin-bottom: 6px;
+}
+
+.alert-card p {
+  color: #667085;
+  line-height: 1.5;
+}
+
+/* FEATURES */
+
+.feature-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 35px;
+  background: white;
+  border-radius: 22px;
+  border: 1px solid #e1e8f0;
+  box-shadow: 0 10px 30px rgba(40, 80, 120, 0.07);
+}
+
+.feature-large-icon {
+  font-size: 50px;
+  margin-bottom: 12px;
+}
+
+.feature-card h2 {
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  color: #667085;
+  line-height: 1.6;
+}
+
+.feature-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: #1769aa;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 50px;
+  padding: 30px;
+  text-align: center;
+  color: #667085;
+  border-top: 1px solid #e1e8f0;
+  background: white;
+}
+
+footer span {
+  margin: 0 7px;
+}
+
+/* LOADING */
+
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #eef7ff, #ffffff);
+}
+
+.loading-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.loading-screen h1 {
+  font-size: 40px;
+}
+
+.loading-screen p {
+  color: #667085;
+  margin-top: 10px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .forecast-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  main {
+    width: 94%;
+  }
+
+  .hero-card {
+    padding: 35px 18px;
+  }
+
+  .main-temperature {
+    font-size: 60px;
+  }
+
+  .weather-stats {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .forecast-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .feature-section {
+    grid-template-columns: 1fr;
+  }
+
+  .question-box {
+    flex-direction: column;
+  }
+
+  .question-box button {
+    padding: 15px;
+  }
+
+  .powered {
+    letter-spacing: 2px;
+  }
+}
+/* Fix Ask WeatherGPT heading and subtitle overlap */
+h1 {
+  position: relative !important;
+  display: block !important;
+  line-height: 1.15 !important;
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+  transform: none !important;
+}
+
+h1 + p {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  margin-top: 0 !important;
+  margin-bottom: 30px !important;
+  line-height: 1.5 !important;
+  transform: none !important;
+  top: auto !important;
+  bottom: auto !important;
+}
