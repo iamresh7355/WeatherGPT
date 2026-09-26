@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WeatherGPT | CyberSmith</title>
+
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Animated Background -->
+  <div class="sky">
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">☁</span>
+      <span>WeatherGPT</span>
+    </div>
+
+    <nav>
+      <button class="nav-btn" data-target="home">Home</button>
+      <button class="nav-btn" data-target="forecast">Forecast</button>
+      <button class="nav-btn" data-target="map-section">Weather Map</button>
+      <button class="nav-btn" data-target="ask-section">Ask AI</button>
+      <button class="nav-btn" data-target="air-section">Air Quality</button>
+      <button class="nav-btn" data-target="farm-section">Farming</button>
+      <button class="nav-btn" data-target="alerts-section">Alerts</button>
+    </nav>
+
+    <button id="locationBtn" class="location-btn">
+      📍 My Location
+    </button>
+  </header>
+
+
+  <!-- HERO -->
+  <main id="home">
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        
+
+        <h1>
+          WeatherGPT
+        </h1>
+
+        <p class="hero-title">
+          AI-Powered Conversational Weather & Disaster Alert System
+        </p>
+
+        <p class="hero-description">
+          Get real-time weather, forecasts, alerts and climate information
+          for any location around the world.
+        </p>
+
+
+        <!-- SEARCH -->
+        <div class="search-box">
+
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search city, state or country..."
+            autocomplete="off"
+          >
+
+          <button id="micBtn" class="mic-btn" title="Search using voice">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/>
+              <path d="M19 11a7 7 0 0 1-14 0"/>
+              <path d="M12 18v4"/>
+              <path d="M8 22h8"/>
+            </svg>
+          </button>
+
+          <button id="searchBtn" class="search-btn">
+            Search
+          </button>
+
+        </div>
+
+        <div id="voiceStatus" class="voice-status"></div>
+
+        <div id="suggestions" class="suggestions"></div>
+
+        <div id="status" class="status">
+          Loading weather...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CURRENT WEATHER -->
+    <section class="section weather-section">
+
+      <div class="section-title">
+        <span>🌤️</span>
+        <div>
+          <h2>Current Weather</h2>
+          <p>Live weather conditions</p>
+        </div>
+      </div>
+
+      <div class="current-card">
+
+        <div class="current-main">
+
+          <div class="weather-icon" id="weatherIcon">
+            ☀️
+          </div>
+
+          <div>
+            <div id="cityName" class="city-name">
+              Lucknow
+            </div>
+
+            <div id="countryName" class="country-name">
+              India
+            </div>
+
+            <div id="temperature" class="temperature">
+              --°C
+            </div>
+
+            <div id="condition" class="condition">
+              Loading...
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="weather-stats">
+
+          <div class="stat">
+            <span>💧</span>
+            <div>
+              <small>Humidity</small>
+              <strong id="humidity">--%</strong>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>💨</span>
+            <div>
+              <small>Wind Speed</small>
+              <strong id="wind">-- km/h</strong>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>🌧️</span>
+            <div>
+              <small>Rain Chance</small>
+              <strong id="rainChance">--%</strong>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>🌡️</span>
+            <div>
+              <small>Feels Like</small>
+              <strong id="feelsLike">--°C</strong>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>🌅</span>
+            <div>
+              <small>Sunrise</small>
+              <strong id="sunrise">--</strong>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>🌇</span>
+            <div>
+              <small>Sunset</small>
+              <strong id="sunset">--</strong>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- WEATHER MAP -->
+    <section id="map-section" class="section">
+
+      <div class="section-title">
+        <span>🗺️</span>
+        <div>
+          <h2>Weather Map</h2>
+          <p>Location of the selected place</p>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div id="map"></div>
+      </div>
+
+    </section>
+
+
+    <!-- 7 DAY FORECAST -->
+    <section id="forecast" class="section">
+
+      <div class="section-title">
+        <span>📅</span>
+        <div>
+          <h2>7-Day Forecast</h2>
+          <p>Plan your week with confidence</p>
+        </div>
+      </div>
+
+      <div id="forecastGrid" class="forecast-grid"></div>
+
+    </section>
+
+
+    <!-- ASK AI -->
+    <section id="ask-section" class="section">
+
+      <div class="section-title">
+        <span>🤖</span>
+        <div>
+          <h2>Ask WeatherGPT</h2>
+          <p>Ask questions about weather</p>
+        </div>
+      </div>
+
+      <div class="ai-card">
+
+        <div class="ai-input-row">
+
+          <input
+            id="questionInput"
+            type="text"
+            placeholder="Example: Will it rain today?"
+          >
+
+          <button id="askBtn">
+            Ask
+          </button>
+
+        </div>
+
+        <div class="quick-actions">
+
+          <button class="quick-btn" data-question="Will it rain today?">
+            🌧️ Rain today?
+          </button>
+
+          <button class="quick-btn" data-question="What is the temperature?">
+            🌡️ Temperature
+          </button>
+
+          <button class="quick-btn" data-question="Is it windy today?">
+            💨 Wind
+          </button>
+
+          <button class="quick-btn" data-question="Is the weather good for farming?">
+            🌱 Farming
+          </button>
+
+        </div>
+
+        <div id="aiAnswer" class="ai-answer">
+          Ask me anything about the weather.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- AIR QUALITY -->
+    <section id="air-section" class="section">
+
+      <div class="section-title">
+        <span>🌿</span>
+        <div>
+          <h2>Air Quality</h2>
+          <p>Current air quality information</p>
+        </div>
+      </div>
+
+      <div class="air-card">
+
+        <div class="aq-main">
+          <span class="aq-icon">🌎</span>
+
+          <div>
+            <small>Air Quality Index</small>
+            <strong id="aqi">--</strong>
+          </div>
+        </div>
+
+        <div class="aq-details">
+
+          <div>
+            <small>PM2.5</small>
+            <strong id="pm25">--</strong>
+          </div>
+
+          <div>
+            <small>PM10</small>
+            <strong id="pm10">--</strong>
+          </div>
+
+          <div>
+            <small>NO₂</small>
+            <strong id="no2">--</strong>
+          </div>
+
+          <div>
+            <small>O₃</small>
+            <strong id="o3">--</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FARMING -->
+    <section id="farm-section" class="section">
+
+      <div class="section-title">
+        <span>🌾</span>
+        <div>
+          <h2>Farming Assistant</h2>
+          <p>Weather-based farming guidance</p>
+        </div>
+      </div>
+
+      <div class="farm-card">
+
+        <div class="farm-icon">
+          🌱
+        </div>
+
+        <div>
+          <h3 id="farmTitle">
+            Farming Advice
+          </h3>
+
+          <p id="farmAdvice">
+            Weather information will appear here.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ALERTS -->
+    <section id="alerts-section" class="section">
+
+      <div class="section-title">
+        <span>🚨</span>
+        <div>
+          <h2>Weather Alerts</h2>
+          <p>Important weather warnings</p>
+        </div>
+      </div>
+
+      <div id="alertsBox" class="alerts-box">
+        <div class="safe-alert">
+          ✅ No major weather alert detected.
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-logo">
+      ☁ WeatherGPT
+    </div>
+
+    <p>
+      AI-Powered Weather & Disaster Information System
+    </p>
+
+    <div class="footer-team">
+      Developed by <strong>Team CyberSmith</strong>
+    </div>
+
+   
+
+  </footer>
+
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
